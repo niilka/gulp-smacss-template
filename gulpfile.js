@@ -41,7 +41,7 @@ gulp.task('sass', function () {
     }))
     .pipe(autoprefixer(['last 15 versions']))
     .pipe(cleanCSS())
-    .pipe(sourcemaps.write('app/maps'))
+    .pipe(sourcemaps.write(''))
     .pipe(gulp.dest('app/css'))
     .pipe(browserSync.reload({
       stream: true
@@ -61,11 +61,11 @@ gulp.task('pug', function () {
 
 gulp.task('scripts', function () {
   return gulp.src([
-      'app/js/scripts.js',
+      'app/scripts/scripts.js',
     ])
     .pipe(concat('scripts.min.js'))
     .pipe(uglify())
-    .pipe(gulp.dest('app/js'))
+    .pipe(gulp.dest('app/scripts'))
     .pipe(browserSync.reload({
       stream: true
     }));
@@ -139,7 +139,7 @@ gulp.task('build', ['removedist', 'imagemin', 'pug', 'sass', 'scripts'], functio
 
 gulp.task('watch', ['pug', 'sass', 'scripts', 'browser-sync'], function () {
   gulp.watch('app/sass/**/*.scss', ['sass']);
-  gulp.watch(['libs/**/*.js', 'app/js/common.js'], ['scripts']);
+  gulp.watch(['libs/**/*.js', 'app/scripts/scripts.js'], ['scripts']);
   gulp.watch('app/*.pug', ['pug'], browserSync.reload);
 });
 
